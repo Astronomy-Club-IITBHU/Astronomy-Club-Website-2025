@@ -54,7 +54,7 @@ const Introduction = () => {
 
 const EventCard = ({ event, index }) => {
     const handleCardClick = () => {
-        alert(`You clicked on ${event.title}`);
+        console.log(`You clicked on ${event.title}`);
     };
 
     return (
