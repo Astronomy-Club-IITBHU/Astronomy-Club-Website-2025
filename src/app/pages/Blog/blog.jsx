@@ -1,54 +1,77 @@
-'use client';
-import React from 'react';
+'use client'
+
+import React, { useEffect, useState } from 'react';
+import blogs_data from './data';
+import BlogCard from '@/app/Components/BlogCard';
 import Image from 'next/image';
+import { motion } from "framer-motion";
+import star from '../../../../public/star.png';
 
-const MyComponent = (props) => {
-  const { title, author, slug, description, date, category, image, writer, heading, text, onClose } = props;
+const containerStyle = {
+  margin: '60px 150px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  cursor: 'none'
+};
 
-  const handleClose = () => {
-    if (onClose) {
-      onClose();
-    }
+const BlogPage = () => {
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setCursorPosition({ x: e.clientX, y: e.clientY });
   };
 
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
-    <div className="fullscreen-overlay">
-      <button onClick={handleClose} className="close-button">
-        Close
-      </button>
-      {/* <div className="content">
-        <h2 style={{ color: 'white', fontSize: '50px' , alignContent: 'center'}}>{title}</h2> */}
-      {/* <Image
-        src={image}
-        alt={title}
-        width={300} // Set the desired width
-        height={200} // Set the desired height
-      /> */}
-      {/* <p style={{ color: 'whitesmoke' , fontSize: '40px' , alignContent: 'center'}} className='ptag'>Description:</p>
-        <br></br>
-        <p style={{ color: 'whitesmoke' , fontSize: '40px' , alignContent: 'center'}} className='ptag'>{disc}</p>
-      </div> */}
-
-      <div class="blog-container">
-        <div class="blog-header">
-          <h1 class="blog-title">Title: {title}</h1>
-          <p class="blog-author">Author: {author}</p>
-        </div>
-
-        <p class="blog-description">Description: {description}</p>
-
-        <p class="blog-date">Published on: {date}</p>
-        <p class="blog-category">Category: {category}</p>
-
-        <img src={image} alt="Blog Image" class="blog-image"></img>
-
-        <div class="blog-content">
-          <h2>{heading}</h2>
-          <p>{text}</p>
+    <>
+      {/* Custom Star Cursor */}
+      <div
+        className="fixed top-0 left-0 pointer-events-none"
+        style={{
+          transform: `translate(${cursorPosition.x}px, ${cursorPosition.y}px)`,
+          zIndex: 1000,
+        }}
+      >
+        <Image src={star} alt="Star Cursor" width={30} height={30} />
+      </div>
+      <motion.h1
+        className="text-4xl font-bold mb-6 mt-20 text-center text-white"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        Our Blogs
+      </motion.h1>
+      <div style={containerStyle}>
+        <div className='flex flex-wrap justify-center gap-x-10 gap-y-10'>
+          {blogs_data.map((blog, index) => (
+            <motion.div
+              key={blog.title}
+              className="blog-card-wrapper"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <BlogCard
+                title={blog.title}
+                image={blog.img}
+                disc={blog.desc}
+                link={blog.link}
+              />
+            </motion.div>
+          ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default MyComponent;
+export default BlogPage;

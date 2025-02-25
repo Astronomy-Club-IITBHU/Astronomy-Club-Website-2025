@@ -36,13 +36,13 @@ const Header = () => {
               </button>
             </Link>
           </div>
-          {/* <div className='hidden lg:w-[120px] md:w-[100px] sm:w-[80px] w-[60px] sm:flex items-center justify-center'>
-            <Link href='/pages/Blogs'>
+          <div className='hidden lg:w-[120px] md:w-[100px] sm:w-[80px] w-[60px] sm:flex items-center justify-center'>
+            <Link href='/pages/Blog'>
               <button className='hover:font-bold transition-transform transform hover:scale-110 text-white'>
                 Blogs
               </button>
             </Link>
-          </div> */}
+          </div>
           <div className='hidden lg:w-[120px] md:w-[100px] sm:w-[80px] w-[60px] sm:flex items-center justify-center '>
             <Link href='/pages/Projects'>
               <button className='hover:font-bold transition-transform transform hover:scale-110 text-white'>
