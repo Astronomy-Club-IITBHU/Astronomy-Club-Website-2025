@@ -4,20 +4,8 @@ import React, { useEffect, useState } from 'react';
 import events_data from './data';
 import EventCard from '@/app/Components/EventCard';
 import Image from 'next/image';
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import star from '../../../../public/star.png';
-
-const containerStyle = {
-  margin: '60px 150px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  cursor: 'none'
-};
-
-const headingStyle = {
-  fontSize: '24px'
-};
 
 const Activities = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -35,7 +23,6 @@ const Activities = () => {
 
   return (
     <>
-      {/* Custom Star Cursor */}
       <div
         className="fixed top-0 left-0 pointer-events-none"
         style={{
@@ -43,25 +30,36 @@ const Activities = () => {
           zIndex: 1000,
         }}
       >
-        <Image src={star} alt="Star Cursor" width={30} height={30} />
+        <Image
+          src={star}
+          alt="Star Cursor"
+          width={cursorPosition.x > 800 ? 40 : 20}
+          height={cursorPosition.x > 800 ? 40 : 20}
+        />
       </div>
+
       <motion.h1
-        className="text-4xl font-bold mb-6 mt-20 text-center text-white"
+        className="text-3xl sm:text-4xl font-bold mb-6 text-center text-white mt-24"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1, ease: 'easeOut' }}
       >
         Our Events and Activities
       </motion.h1>
-      <div style={containerStyle}>
-        <div className='flex flex-wrap justify-center gap-x-10 gap-y-10'>
+
+      <div className="container mx-auto px-4 sm:px-8 mt-12">
+        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 w-full">
           {events_data.map((event, index) => (
             <motion.div
               key={event.title}
-              className="event-card-wrapper"
+              className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 flex justify-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+              transition={{
+                duration: 0.8,
+                ease: 'easeOut',
+                delay: index * 0.2,
+              }}
               viewport={{ once: true }}
             >
               <EventCard
