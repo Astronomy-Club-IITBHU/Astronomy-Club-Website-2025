@@ -65,25 +65,24 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="flex justify-center items-center mt-10 md:mt-0">
-          <div className="relative w-60 sm:w-96">
-            
-            <motion.div variants={heroVariants} animate="visible">
-              <Image src={Hero} alt="Astronomy Club Hero" width={300} height={300} className="w-full h-auto" />
-            </motion.div>
+        <div className="relative flex justify-center items-center mt-10 md:mt-0 w-60 sm:w-96">
+          <div className="absolute inset-0 -z-10">
+            <ParticleEffect />
           </div>
+          <motion.div variants={heroVariants} animate="visible">
+            <Image src={Hero} alt="Astronomy Club Hero" width={300} height={300} className="w-full h-auto" />
+          </motion.div>
         </div>
       </div>
 
-      {/* Activities Section */}
       <motion.div className="container mx-auto px-4 mt-16" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}>
         <h2 className="text-white text-center text-xl sm:text-3xl font-bold">What Do We Do?</h2>
         <motion.ul className="mt-6 space-y-4 text-white text-sm sm:text-lg px-4 sm:px-20">
           {[
-            "🔭 Observational Sessions - Night sky events where members observe planets, galaxies, and celestial phenomena.",
-            "📷 Astrophotography - Capture stunning images of deep-space objects using specialized equipment.",
-            "🚀 The Rocket Team - Design, simulate, and launch model rockets while learning aerodynamics and propulsion.",
-            "🛰 Satellite Team - Research and develop small satellite projects focusing on CubeSats and space technology."
+            "🔭 Observational Sessions -  We regularly organize night sky observation events where members can observe planets, star clusters, nebulae, and galaxies through high-powered telescopes.These sessions help students understand celestial navigation, constellations, and real-time  astronomical phenomena like eclipses, meteor showers, and planetary transits.", 
+            "📷 Astrophotography - We capture breathtaking images of celestial objects, including the Moon, planets, and deep-space objects like nebulae and galaxies. Members learn image processing and the use of specialized equipment to document the beauty of the cosmos.",
+            "🚀 The Rocket Team - Our team works on designing, simulating, and launching model rockets, experimenting with aerodynamics, propulsion systems, and payloads. We conduct hands-on sessions where students build and test their own rockets, applying fundamental physics and engineering concepts.",
+            "🛰 Satellite Team - We research and develop small satellite projects, focusing on CubeSats. Members get to work on hardware design, software programming, and real-world space applications, preparing them for future opportunities in space technology and exploration."
           ].map((text, index) => (
             <motion.li key={index} className="p-4 bg-gray-800 rounded-lg shadow-lg" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.2 }}>
               {text}
@@ -92,14 +91,12 @@ const Home = () => {
         </motion.ul>
       </motion.div>
 
-      {/* Scrolling Marquee */}
       <div className="mt-12 bg-gradient-to-r from-black to-green-500 p-3">
         <marquee className="text-white font-bold text-lg">Welcome to the Astronomy Club! Join us in exploring the universe with exciting events and activities.</marquee>
       </div>
 
-      {/* Custom Cursor Effect */}
       <div className="fixed top-0 left-0 pointer-events-none" style={{ transform: `translate(${cursorPosition.x}px, ${cursorPosition.y}px)`, zIndex: 1000 }}>
-        <Image src={star} alt="Star Cursor" width={20} height={20} />
+        <Image src={star} alt="Star Cursor" width={30} height={30} />
       </div>
     </div>
   )
